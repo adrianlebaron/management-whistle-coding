@@ -4,7 +4,7 @@ import styles from './layout.module.css';
 import utilStyles from '../styles/utils.module.css';
 import Link from 'next/link';
 
-const name = 'Whistle Coding Documentation';
+const name = 'Whistle Coding Management';
 export const siteTitle = 'Next.js Sample Website';
 
 export default function Layout({ children, home }) {
@@ -30,10 +30,10 @@ export default function Layout({ children, home }) {
                     <>
                         <Image
                             priority
-                            src="/images/wclogo.png"
+                            src="/images/logo.png"
                             className={utilStyles.borderCircle}
-                            height={144}
-                            width={144}
+                            height={100}
+                            width={100}
                             alt=""
                         />
                         <h1 className={utilStyles.heading2Xl}>{name}</h1>
@@ -43,10 +43,10 @@ export default function Layout({ children, home }) {
                         <Link href="/">
                             <Image
                                 priority
-                                src="/images/wclogo.png"
+                                src="/images/logo.png"
                                 className={utilStyles.borderCircle}
-                                height={108}
-                                width={108}
+                                height={200}
+                                width={200}
                                 alt=""
                             />
                         </Link>
