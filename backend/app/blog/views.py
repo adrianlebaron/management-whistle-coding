@@ -1,6 +1,6 @@
 # Create your views here.
 from rest_framework.decorators import api_view, permission_classes
-from rest_framework.permissions import IsAuthenticated
+from rest_framework.permissions import IsAuthenticated, AllowAny
 from rest_framework.response import Response
 from rest_framework import status
 
@@ -9,6 +9,7 @@ from .models import Blog
 
 
 @api_view(['GET'])
+@permission_classes([AllowAny])
 def getBlogs(request):
     blog = Blog.objects.filter().order_by('-date')
     serializer = BlogSerializer(blog, many=True)
@@ -16,7 +17,7 @@ def getBlogs(request):
 
 
 @api_view(['GET'])
-@permission_classes([IsAuthenticated])
+@permission_classes([AllowAny])
 def getSoloBlog(request, pk):
     blog = Blog.objects.get(id=pk)
     serializer = BlogSerializer(blog, many=False)

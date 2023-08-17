@@ -1,7 +1,6 @@
 from rest_framework import serializers
 from rest_framework.decorators import api_view, permission_classes
-from rest_framework.permissions import IsAuthenticated
-from rest_framework.permissions import AllowAny
+from rest_framework.permissions import IsAuthenticated, AllowAny
 from rest_framework.response import Response
 from django.contrib.auth.hashers import make_password  
 from rest_framework import status, permissions
@@ -12,22 +11,6 @@ from rest_framework_simplejwt.views import TokenObtainPairView
 
 from .models import User
 from .serializers import  UserSerializer, UserSerializerWithToken
-
-
-class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
-    def validate(self, attrs):
-        data = super().validate(attrs)
-
-        serializers = UserSerializerWithToken(self.user).data
-
-        for token, user in serializers.items():
-            data[token] = user
-
-        return data
-
-class MyTokenObtainPairView(TokenObtainPairView):
-    serializer_class = MyTokenObtainPairSerializer
-
 
 class RegisterNewUser(APIView):
     permission_classes=[permissions.AllowAny]

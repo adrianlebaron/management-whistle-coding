@@ -2,6 +2,7 @@
 import { createContext, useContext, useState, useEffect } from 'react';
 import Cookies from 'js-cookie'; // Install this library if you haven't
 
+
 const AuthContext = createContext();
 
 export function AuthProvider({ children }) {
