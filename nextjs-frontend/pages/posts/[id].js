@@ -30,7 +30,7 @@ export async function getStaticProps({ params }) {
     }
 
     const postData = await response.json();
-    console.log('POSTDATA', postData)
+    // console.log('POSTDATA', postData)
 
     return {
         props: {
@@ -50,14 +50,14 @@ export default function Post({ postData }) {
             {isAuthenticated() ? (
                 <>
                     <article>
-                        <h1 className={utilStyles.headingXl}>{postData.title}</h1>
+                        <h1 className={utilStyles.headingXl}>{postData?.title}</h1>
                         <Image
-                            src={postData.picture}
-                            alt={`Image for ${postData.title}`}
-                            width={100} // Set the appropriate width
-                            height={100} // Set the appropriate height
+                            src={`http://127.0.0.1:8000${postData?.picture}`} // Update the URL to match your Django server
+                            alt={`Image for ${postData?.title}`}
+                            width={500} // Set the appropriate width
+                            height={350} // Set the appropriate height
                         />
-                        <p>{postData.body}</p>
+                        <p>{postData?.body}</p>
 
                     </article>
                 </>

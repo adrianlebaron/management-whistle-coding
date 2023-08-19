@@ -32,16 +32,22 @@ export default function Home({ allPostsData }) {
       </Head>
       {isAuthenticated() ? (
         <>
-          <button className='auth-button' onClick={handleLogout}>Logout</button> {/* Logout button */}
+          <button className='auth-button' onClick={handleLogout}>Logout</button>
           <section>
             <h2>Documentation</h2>
             <ul>
-              {allPostsData.map(({ id, date, title }) => (
-                <li key={id}>
-                  <Link href={`/posts/${id}`}>{title}</Link>
-                  <br />
-                </li>
-              ))}
+              {allPostsData.map(({ id, date, title }) => {
+                // Extract only the date part from the ISO format date string
+                const trimmedDate = date.substring(0, 10);
+
+                return (
+                  <li key={id}>
+                    <Link href={`/posts/${id}`}>{title}</Link>
+                    <br />
+                    <p>{trimmedDate}</p>
+                  </li>
+                );
+              })}
             </ul>
           </section>
         </>

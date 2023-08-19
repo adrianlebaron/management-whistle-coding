@@ -74,7 +74,7 @@ def getSoloUser(request, pk):
 
 
 @api_view(['GET'])
-@permission_classes([IsAuthenticated])
+@permission_classes([AllowAny])
 def getUsers(request):
     users = User.objects.all()
     serializer = UserSerializer(users, many=True)
