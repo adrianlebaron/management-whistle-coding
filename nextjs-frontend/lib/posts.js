@@ -2,7 +2,7 @@ import fs from 'fs';
 import fetch from 'node-fetch'; // Import fetch for making API requests
 // import { useAuth } from '../contexts/AuthContext';
 
-const API_URL = 'http://127.0.0.1:8000/app/blog/get/';
+const API_URL = 'http://api-managewhistle.com/app/blog/get/';
 
 
 export function getAllPostIds() {
