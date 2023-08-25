@@ -23,7 +23,7 @@ export default function LoginPage() {
 
     const handleLogin = async () => {
         try {
-            const response = await axios.post('http://api-managewhistle.com/app/user/login/', {
+            const response = await axios.post('https://api-managewhistle.com/app/user/login/', {
                 username,
                 password,
             });
