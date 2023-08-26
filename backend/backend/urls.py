@@ -22,7 +22,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     # point to the api app and let it handle the traffic there
     path('api/', include('api.urls')),
-    path('app/user/', include('app.user.urls')),
     path('app/blog/', include('app.blog.urls')),
 ]
 
