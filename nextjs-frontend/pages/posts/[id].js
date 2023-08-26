@@ -3,7 +3,7 @@ import { getAllPostsData } from '../../lib/posts';
 import Head from 'next/head';
 import utilStyles from '../../styles/utils.module.css';
 import Image from 'next/image';
-import Link from 'next/link'; // Add this import
+import Link from 'next/link';
 import { useAuth } from '../../contexts/AuthContext';
 
 const API_URL = 'https://api-managewhistle.com/app/blog/get/';
@@ -56,6 +56,7 @@ export default function Post({ postData }) {
                             alt={`Image for ${postData?.title}`}
                             width={500} // Set the appropriate width
                             height={350} // Set the appropriate height
+                            priority={true} // {false} | {true}
                         />
                         <p>{postData?.body}</p>
 

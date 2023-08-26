@@ -9,7 +9,6 @@ import Router from 'next/router';
 
 export async function getStaticProps() {
   const allPostsData = await getAllPostsData();
-  // Ya se quito el error de home jaja
   return {
     props: {
       allPostsData,

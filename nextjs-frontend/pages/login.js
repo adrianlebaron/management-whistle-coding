@@ -23,7 +23,7 @@ export default function LoginPage() {
 
     const handleLogin = async () => {
         try {
-            const response = await axios.post('https://api-managewhistle.com/app/user/login/', {
+            const response = await axios.post('https://api-managewhistle.com/api/login/', {
                 username,
                 password,
             });
@@ -53,7 +53,7 @@ export default function LoginPage() {
             <input
                 className='login-input'
                 type="text"
-                placeholder="Username"
+                placeholder="username"
                 value={username}
                 onChange={(e) => setUsername(e.target.value)}
             />

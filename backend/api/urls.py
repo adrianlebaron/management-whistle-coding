@@ -1,8 +1,8 @@
 from django.urls import path
 from . import views
+from rest_framework.authtoken.views import obtain_auth_token
 
 urlpatterns = [
-    path('users/login/', views.MyTokenObtainPairView.as_view(), name='token_obtain_pair'),
-    path('users/profile/', views.getUserProfile, name="users-profile"),
-    # path('users/', views.getUsers, name="users")
+    path('login/', obtain_auth_token, name='api_token_auth'),
+    path('get-users/', views.getUsers, name="users")
 ]
