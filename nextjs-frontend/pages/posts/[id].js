@@ -5,6 +5,7 @@ import utilStyles from '../../styles/utils.module.css';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useAuth } from '../../contexts/AuthContext';
+import Linkify from 'react-linkify';
 
 const API_URL = 'https://api-managewhistle.com/app/blog/get/';
 
@@ -47,18 +48,34 @@ export default function Post({ postData }) {
             <Head>
                 <title>{postData.title}</title>
             </Head>
+            <div style={{ border: '1px solid #f41a24', margin: '40px' }}></div>
+            <Link href="/">Back to home</Link>
+
             {isAuthenticated() ? (
                 <>
                     <article>
                         <h1 className={utilStyles.headingXl}>{postData?.title}</h1>
-                        <Image
-                            src={`https://api-managewhistle.com${postData?.picture}`} // Update the URL to match your Django server
-                            alt={`Image for ${postData?.title}`}
-                            width={500} // Set the appropriate width
-                            height={350} // Set the appropriate height
-                            priority={true} // {false} | {true}
-                        />
-                        <p>{postData?.body}</p>
+                        {postData?.picture && (
+                            <Image
+                                src={`http://127.0.0.1:8000${postData?.picture}`}
+                                alt={`Image for ${postData?.title}`}
+                                width={1000}
+                                height={450}
+                                priority={true}
+                            />
+                        )}
+                        <br />
+                        {postData?.video && (
+                            <video
+                                controls
+                                width={900}
+                                height={500}
+                            >
+                                <source src={`http://127.0.0.1:8000${postData?.video}`} type="video/mp4" />
+                                Your browser does not support the video tag.
+                            </video>
+                        )}
+                        <Linkify>{postData?.body}</Linkify>
 
                     </article>
                 </>
@@ -70,6 +87,7 @@ export default function Post({ postData }) {
                     </Link>
                 </div>
             )}
+
         </Layout>
     );
 }

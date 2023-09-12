@@ -32,7 +32,8 @@ def postBlog(request):
     blog = Blog.objects.create(
         user = request.user,
         body = data['body'],
-        picture = file('picture')
+        picture = file('picture'),
+        video=file
     )
     serializer = BlogSerializer(blog, many=False)
     return Response(serializer.data)
