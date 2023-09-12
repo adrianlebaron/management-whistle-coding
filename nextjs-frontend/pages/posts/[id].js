@@ -6,6 +6,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useAuth } from '../../contexts/AuthContext';
 import Linkify from 'react-linkify';
+import Markdown from 'markdown-to-jsx';
 
 const API_URL = 'http://127.0.0.1:8000/app/blog/get/';
 
@@ -43,6 +44,25 @@ export async function getStaticProps({ params }) {
 export default function Post({ postData }) {
     const { isAuthenticated } = useAuth();
 
+    // Render Markdown content using markdown-to-jsx
+    const markdownContent = (
+        <Markdown
+            options={{
+                overrides: {
+                    a: {
+                        component: ({ href, children }) => (
+                            <a href={href} target="_blank" rel="noopener noreferrer">
+                                {children}
+                            </a>
+                        ),
+                    },
+                },
+            }}
+        >
+            {postData?.body}
+        </Markdown>
+    );
+
     return (
         <Layout>
             <Head>
@@ -75,8 +95,9 @@ export default function Post({ postData }) {
                                 Your browser does not support the video tag.
                             </video>
                         )}
-                        <Linkify>{postData?.body}</Linkify>
-
+                        <p>
+                            {markdownContent}
+                        </p>
                     </article>
                 </>
             ) : (
