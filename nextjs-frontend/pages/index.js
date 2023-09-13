@@ -19,7 +19,7 @@ export async function getStaticProps() {
 
 export async function getDomains() {
   try {
-    const response = await fetch('http://127.0.0.1:8000/api/get-domains/');
+    const response = await fetch('https://api-managewhistle.com/api/get-domains/');
     if (!response.ok) {
       throw new Error('Failed to fetch data');
     }
