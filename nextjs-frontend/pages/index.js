@@ -95,7 +95,7 @@ export default function Home({ allPostsData }) {
         </>
       ) : (
         <div>
-          <p>You need to log in to access this page.</p>
+          <span>You need to log in to access this page.</span>
           <Link href="/login">
             <button className='auth-button'>Login</button>
           </Link>

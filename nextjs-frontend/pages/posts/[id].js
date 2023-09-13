@@ -5,7 +5,7 @@ import utilStyles from '../../styles/utils.module.css';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useAuth } from '../../contexts/AuthContext';
-import Linkify from 'react-linkify';
+import Markdown from 'markdown-to-jsx';
 
 const API_URL = 'https://api-managewhistle.com/app/blog/get/';
 
@@ -43,6 +43,36 @@ export async function getStaticProps({ params }) {
 export default function Post({ postData }) {
     const { isAuthenticated } = useAuth();
 
+    // Render Markdown content using markdown-to-jsx
+    const markdownContent = (
+        <Markdown
+            options={{
+                overrides: {
+                    a: {
+                        component: ({ href, children }) => (
+                            <a href={href} target="_blank" rel="noopener noreferrer">
+                                {children}
+                            </a>
+                        ),
+                    },
+                    pre: {
+                        component: 'pre',
+                        props: {
+                            style: {
+                                backgroundColor: '#242f35',
+                                borderRadius: '5px',
+                                padding: '15px',
+                                color: 'rgb(252 152 103)',
+                            }
+                        }
+                    }
+                },
+            }}
+        >
+            {postData?.body}
+        </Markdown>
+    );
+
     return (
         <Layout>
             <Head>
@@ -59,8 +89,8 @@ export default function Post({ postData }) {
                             <Image
                                 src={`http://127.0.0.1:8000${postData?.picture}`}
                                 alt={`Image for ${postData?.title}`}
-                                width={1000}
-                                height={450}
+                                width={1500}
+                                height={550}
                                 priority={true}
                             />
                         )}
@@ -75,8 +105,9 @@ export default function Post({ postData }) {
                                 Your browser does not support the video tag.
                             </video>
                         )}
-                        <Linkify>{postData?.body}</Linkify>
-
+                        <div>
+                            {markdownContent}
+                        </div>
                     </article>
                 </>
             ) : (
