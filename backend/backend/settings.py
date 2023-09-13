@@ -28,7 +28,7 @@ SECRET_KEY = 'django-insecure-5n^&gf6=ktqci0ueqf4%gwf0xj+)2#la(4#v^@526=o=4wb)ng
 DEBUG = False
 
 ALLOWED_HOSTS = [
-    'management.us-west-2.elasticbeanstalk.com',
+    'manage-whistle.us-west-2.elasticbeanstalk.com',
     'api-managewhistle.com',
 ]
 
