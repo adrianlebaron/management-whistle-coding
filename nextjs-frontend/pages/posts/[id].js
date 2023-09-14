@@ -1,4 +1,4 @@
-import { useRouter } from 'next/router';
+// pages/blog/[id].js
 import Layout from '../../components/layout';
 import Head from 'next/head';
 import utilStyles from '../../styles/utils.module.css';
@@ -8,8 +8,6 @@ import { useAuth } from '../../contexts/AuthContext';
 import Markdown from 'markdown-to-jsx';
 
 export default function Blog({ blog }) {
-    const router = useRouter();
-
     const { isAuthenticated } = useAuth();
 
     // Render Markdown content using markdown-to-jsx
@@ -32,19 +30,15 @@ export default function Blog({ blog }) {
                                 borderRadius: '5px',
                                 padding: '15px',
                                 color: 'rgb(252 152 103)',
-                            }
-                        }
-                    }
+                            },
+                        },
+                    },
                 },
             }}
         >
             {blog?.body}
         </Markdown>
     );
-
-    if (router.isFallback) {
-        return <div>Loading...</div>;
-    }
 
     return (
         <Layout>
@@ -69,18 +63,12 @@ export default function Blog({ blog }) {
                         )}
                         <br />
                         {blog?.video && (
-                            <video
-                                controls
-                                width={900}
-                                height={500}
-                            >
+                            <video controls width={900} height={500}>
                                 <source src={`https://api-managewhistle.com${blog?.video}`} type="video/mp4" />
                                 Your browser does not support the video tag.
                             </video>
                         )}
-                        <div>
-                            {markdownContent}
-                        </div>
+                        <div>{markdownContent}</div>
                     </article>
                 </>
             ) : (
@@ -91,28 +79,12 @@ export default function Blog({ blog }) {
                     </Link>
                 </div>
             )}
-
         </Layout>
     );
 }
 
-export async function getStaticPaths() {
-    // Fetch blog IDs from the Django API
-    const res = await fetch('https://api-managewhistle.com/app/blog/get/');
-    const blogs = await res.json();
-
-    const paths = blogs.map((blog) => ({
-        params: { id: blog.id.toString() },
-    }));
-
-    return {
-        paths,
-        fallback: true,
-    };
-}
-
-export async function getStaticProps({ params }) {
-    // Fetch a specific blog by ID from the Django API
+export async function getServerSideProps({ params }) {
+    // Fetch a specific blog by ID from the Django API on the server side
     const res = await fetch(`https://api-managewhistle.com/app/blog/get/${params.id}`);
     const blog = await res.json();
 
@@ -120,6 +92,5 @@ export async function getStaticProps({ params }) {
         props: {
             blog,
         },
-        revalidate: 60, // Revalidate this page every 60 seconds
     };
 }

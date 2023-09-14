@@ -1,3 +1,4 @@
+// pages/index.js
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import Head from "next/head";
@@ -84,8 +85,8 @@ export default function Home({ blogs }) {
   );
 }
 
-export async function getStaticProps() {
-  // Fetch blogs from the Django API
+export async function getServerSideProps() {
+  // Fetch blogs from the Django API on the server side
   const res = await fetch('https://api-managewhistle.com/app/blog/get/');
   const blogs = await res.json();
 
@@ -93,6 +94,5 @@ export async function getStaticProps() {
     props: {
       blogs,
     },
-    revalidate: 60, // Revalidate every 60 seconds
   };
 }
