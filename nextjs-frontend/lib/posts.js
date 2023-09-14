@@ -1,11 +1,33 @@
 // import fs from 'fs';
-import fetch from 'node-fetch'; // Import fetch for making API requests
+import axios from "axios"; // Import fetch for making API requests
 // import { useAuth } from '../contexts/AuthContext';
 
-const API_URL = 'https://api-managewhistle.com/app/blog/get/';
+const API_URL = "https://api-managewhistle.com";
+
+export async function getDomains() {
+    try {
+        const response = await axios.get(`${API_URL}/api/get-domains/`);
+
+        if (response.status !== 200) {
+            throw new Error("Failed to fetch data");
+        }
+
+        return response.data;
+    } catch (error) {
+        throw new Error("Failed to fetch data");
+    }
+}
 
 export async function getAllPostsData() {
-    const response = await fetch(API_URL);
-    const allPostsData = await response.json();
-    return allPostsData;
+    try {
+        const response = await axios.get(`${API_URL}/app/blog/get/`);
+
+        if (response.status !== 200) {
+            throw new Error("Failed to fetch data");
+        }
+
+        return response.data;
+    } catch (error) {
+        throw new Error("Failed to fetch data");
+    }
 }
