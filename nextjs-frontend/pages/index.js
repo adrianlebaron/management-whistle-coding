@@ -93,5 +93,6 @@ export async function getStaticProps() {
     props: {
       blogs,
     },
+    revalidate: 60, // Revalidate every 60 seconds
   };
 }
