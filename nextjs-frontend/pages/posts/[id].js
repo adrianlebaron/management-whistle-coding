@@ -87,7 +87,7 @@ export default function Post({ postData }) {
                         <h1 className={utilStyles.headingXl}>{postData?.title}</h1>
                         {postData?.picture && (
                             <Image
-                                src={`https://api-managewhistle.com${postData?.picture}`}
+                                src={`https://api-managewhistle.com/${postData?.picture}`}
                                 alt={`Image for ${postData?.title}`}
                                 width={1500}
                                 height={550}
@@ -101,7 +101,7 @@ export default function Post({ postData }) {
                                 width={900}
                                 height={500}
                             >
-                                <source src={`https://api-managewhistle.com${postData?.video}`} type="video/mp4" />
+                                <source src={`https://api-managewhistle.com/${postData?.video}`} type="video/mp4" />
                                 Your browser does not support the video tag.
                             </video>
                         )}
