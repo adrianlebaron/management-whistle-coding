@@ -6,22 +6,15 @@ import { useAuth } from "../contexts/AuthContext";
 import Router from "next/router";
 import Linkify from "react-linkify";
 import { FiExternalLink } from "react-icons/fi";
-import { getDomains, getAllPostsData } from "@/lib/posts";
+import { getDomains } from "@/lib/domains";
 
-export default function Home() {
+export default function Home({ blogs }) {
   const { isAuthenticated, setToken } = useAuth();
   const [domains, setDomains] = useState([]);
-  const [docs, setDocs] = useState([]);
 
   useEffect(() => {
     getDomains()
       .then((data) => setDomains(data))
-      .catch((error) => console.error(error));
-  }, []);
-
-  useEffect(() => {
-    getAllPostsData()
-      .then((data) => setDocs(data))
       .catch((error) => console.error(error));
   }, []);
 
@@ -69,20 +62,13 @@ export default function Home() {
           <section>
             <h2>Documentation</h2>
             <ul>
-              {docs.map(({ id, date, title }) => {
-                // Extract only the date part from the ISO format date string
-                const trimmedDate = date.substring(0, 10);
-
-                return (
-                  <li key={id}>
-                    <Link href="/posts/[...id]" as={`/posts/${id}`}>
-                      {title}
-                    </Link>
-                    <br />
-                    <p>{trimmedDate}</p>
-                  </li>
-                );
-              })}
+              {blogs.map((blog) => (
+                <li key={blog.id}>
+                  <Link href={`/posts/${blog.id}`}>
+                    {blog.title}
+                  </Link>
+                </li>
+              ))}
             </ul>
           </section>
         </>
@@ -96,4 +82,16 @@ export default function Home() {
       )}
     </Layout>
   );
+}
+
+export async function getStaticProps() {
+  // Fetch blogs from the Django API
+  const res = await fetch('https://api-managewhistle.com/app/blog/get/');
+  const blogs = await res.json();
+
+  return {
+    props: {
+      blogs,
+    },
+  };
 }
