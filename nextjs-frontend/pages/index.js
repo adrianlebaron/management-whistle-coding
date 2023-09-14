@@ -75,7 +75,9 @@ export default function Home() {
 
                 return (
                   <li key={id}>
-                    <Link href={`/posts/${id}`}>{title}</Link>
+                    <Link href="/posts/[...id]" as={`/posts/${id}`}>
+                      {title}
+                    </Link>
                     <br />
                     <p>{trimmedDate}</p>
                   </li>
