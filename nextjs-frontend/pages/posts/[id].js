@@ -1,5 +1,5 @@
+import { useRouter } from 'next/router';
 import Layout from '../../components/layout';
-import { getAllPostsData } from '../../lib/posts';
 import Head from 'next/head';
 import utilStyles from '../../styles/utils.module.css';
 import Image from 'next/image';
@@ -7,40 +7,9 @@ import Link from 'next/link';
 import { useAuth } from '../../contexts/AuthContext';
 import Markdown from 'markdown-to-jsx';
 
-const API_URL = 'http://127.0.0.1:8000/app/blog/get/';
+export default function Blog({ blog }) {
+    const router = useRouter();
 
-export async function getStaticPaths() {
-    const allPostsData = await getAllPostsData();
-    const paths = allPostsData.map(post => ({
-        params: {
-            id: post.id.toString(),
-        },
-    }));
-
-    return {
-        paths,
-        fallback: false,
-    };
-}
-
-export async function getStaticProps({ params }) {
-    const response = await fetch(`${API_URL}${params.id}/`);
-
-    if (!response.ok) {
-        throw new Error(`Error fetching post data: ${response.statusText}`);
-    }
-
-    const postData = await response.json();
-    // console.log('POSTDATA', postData)
-
-    return {
-        props: {
-            postData,
-        },
-    };
-}
-
-export default function Post({ postData }) {
     const { isAuthenticated } = useAuth();
 
     // Render Markdown content using markdown-to-jsx
@@ -69,14 +38,18 @@ export default function Post({ postData }) {
                 },
             }}
         >
-            {postData?.body}
+            {blog?.body}
         </Markdown>
     );
+
+    if (router.isFallback) {
+        return <div>Loading...</div>;
+    }
 
     return (
         <Layout>
             <Head>
-                <title>{postData.title}</title>
+                <title>{blog.title}</title>
             </Head>
             <div style={{ border: '1px solid #f41a24', margin: '40px' }}></div>
             <Link href="/">Back to home</Link>
@@ -84,24 +57,24 @@ export default function Post({ postData }) {
             {isAuthenticated() ? (
                 <>
                     <article>
-                        <h1 className={utilStyles.headingXl}>{postData?.title}</h1>
-                        {postData?.picture && (
+                        <h1 className={utilStyles.headingXl}>{blog?.title}</h1>
+                        {blog?.picture && (
                             <Image
-                                src={`http://127.0.0.1:8000${postData?.picture}`}
-                                alt={`Image for ${postData?.title}`}
+                                src={`http://127.0.0.1:8000${blog?.picture}`}
+                                alt={`Image for ${blog?.title}`}
                                 width={1500}
                                 height={550}
                                 priority={true}
                             />
                         )}
                         <br />
-                        {postData?.video && (
+                        {blog?.video && (
                             <video
                                 controls
                                 width={900}
                                 height={500}
                             >
-                                <source src={`http://127.0.0.1:8000${postData?.video}`} type="video/mp4" />
+                                <source src={`http://127.0.0.1:8000${blog?.video}`} type="video/mp4" />
                                 Your browser does not support the video tag.
                             </video>
                         )}
@@ -121,4 +94,32 @@ export default function Post({ postData }) {
 
         </Layout>
     );
+}
+
+export async function getStaticPaths() {
+    // Fetch blog IDs from the Django API
+    const res = await fetch('http://127.0.0.1:8000/app/blog/get/');
+    const blogs = await res.json();
+
+    const paths = blogs.map((blog) => ({
+        params: { id: blog.id.toString() },
+    }));
+
+    return {
+        paths,
+        fallback: true,
+    };
+}
+
+export async function getStaticProps({ params }) {
+    // Fetch a specific blog by ID from the Django API
+    const res = await fetch(`http://127.0.0.1:8000/app/blog/get/${params.id}`);
+    const blog = await res.json();
+
+    return {
+        props: {
+            blog,
+        },
+        revalidate: 60, // Revalidate this page every 60 seconds
+    };
 }
