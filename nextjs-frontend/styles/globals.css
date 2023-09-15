@@ -1,3 +1,4 @@
+/* global styles */
 html,
 body {
   padding: 0;
@@ -26,16 +27,21 @@ img {
   display: block;
 }
 
+/* auth elements styles */
 .auth-button {
   font-size: 20px;
-  background-color: #5f3a65;
-  border: #5f3a65;
-  color: white;
-  box-shadow: 2px 2px grey;
-  border-radius: 3px;
+  border-radius: 5px;
   cursor: pointer;
-  padding: 5px;
+  padding: 8px;
   margin: 10px;
+  box-shadow: 3px 3px;
+  background-color: white;
+}
+
+.auth-button:hover {
+  background-color: #2473D5;
+  color: white;
+  box-shadow: 3px 3px black;
 }
 
 .login-input {
@@ -59,4 +65,62 @@ img {
   cursor: pointer;
   border: 1px solid rgb(192, 187, 187);
   background-color: white;
+}
+
+/* Home page styles */
+.domain-section {
+  position: fixed;
+  top: 0;
+  margin: 20px 20px;
+  padding-bottom: 20px;
+  height: 100%;
+  /* Set the height to take up the entire viewport */
+  overflow-y: auto;
+  left: 0;
+  width: 300px;
+}
+
+.home-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  padding-bottom: 0px;
+  margin-bottom: -25px;
+}
+
+@media (max-width: 470px) {
+  .domain-section {
+    position: relative;
+    padding: 0px;
+    margin: 0px;
+  }
+}
+
+.picture {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Blog */
+.blog {
+  margin-right: 150px;
+  margin-left: 150px;
+}
+
+@media (max-width: 470px) {
+  .blog {
+    margin: 10px;
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 95%;
+  }
+
+  .picture img {
+    width: 300;
+    height: 200px;
+  }
 }

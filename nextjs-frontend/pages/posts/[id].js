@@ -28,8 +28,9 @@ export default function Blog({ blog }) {
                             style: {
                                 backgroundColor: '#242f35',
                                 borderRadius: '5px',
-                                padding: '15px',
+                                padding: '20px',
                                 color: 'rgb(252 152 103)',
+                                overflow: 'scroll',
                             },
                         },
                     },
@@ -41,7 +42,7 @@ export default function Blog({ blog }) {
     );
 
     return (
-        <Layout>
+        <div className='blog'>
             <Head>
                 <title>{blog.title}</title>
             </Head>
@@ -53,23 +54,26 @@ export default function Blog({ blog }) {
                     <article>
                         <h1 className={utilStyles.headingXl}>{blog?.title}</h1>
                         {blog?.picture && (
-                            <Image
-                                src={`https://api-managewhistle.com${blog?.picture}`}
-                                alt={`Image for ${blog?.title}`}
-                                width={1500}
-                                height={550}
-                                priority={true}
-                            />
+                            <div className='picture'>
+                                <Image
+                                    src={`https://api-managewhistle.com${blog?.picture}`}
+                                    alt={`Image for ${blog?.title}`}
+                                    width={1080}
+                                    height={550}
+                                    priority={true}
+                                    style={{ display: 'flex', justifyContent: 'center' }}
+                                />
+                            </div>
                         )}
-                        <br />
                         {blog?.video && (
                             <video controls width={900} height={500}>
                                 <source src={`https://api-managewhistle.com${blog?.video}`} type="video/mp4" />
                                 Your browser does not support the video tag.
-                            </video>
-                        )}
+                            </video >
+                        )
+                        }
                         <div>{markdownContent}</div>
-                    </article>
+                    </article >
                 </>
             ) : (
                 <div>
@@ -79,7 +83,7 @@ export default function Blog({ blog }) {
                     </Link>
                 </div>
             )}
-        </Layout>
+        </div>
     );
 }
 
