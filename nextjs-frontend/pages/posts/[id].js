@@ -1,5 +1,4 @@
-import { useRouter } from 'next/router';
-import Layout from '../../components/layout';
+// pages/blog/[id].js
 import Head from 'next/head';
 import utilStyles from '../../styles/utils.module.css';
 import Image from 'next/image';
@@ -8,8 +7,6 @@ import { useAuth } from '../../contexts/AuthContext';
 import Markdown from 'markdown-to-jsx';
 
 export default function Blog({ blog }) {
-    const router = useRouter();
-
     const { isAuthenticated } = useAuth();
 
     // Render Markdown content using markdown-to-jsx
@@ -30,11 +27,12 @@ export default function Blog({ blog }) {
                             style: {
                                 backgroundColor: '#242f35',
                                 borderRadius: '5px',
-                                padding: '15px',
+                                padding: '20px',
                                 color: 'rgb(252 152 103)',
-                            }
-                        }
-                    }
+                                overflow: 'scroll',
+                            },
+                        },
+                    },
                 },
             }}
         >
@@ -42,12 +40,8 @@ export default function Blog({ blog }) {
         </Markdown>
     );
 
-    if (router.isFallback) {
-        return <div>Loading...</div>;
-    }
-
     return (
-        <Layout>
+        <div className='blog'>
             <Head>
                 <title>{blog.title}</title>
             </Head>
@@ -59,28 +53,24 @@ export default function Blog({ blog }) {
                     <article>
                         <h1 className={utilStyles.headingXl}>{blog?.title}</h1>
                         {blog?.picture && (
-                            <Image
-                                src={`http://127.0.0.1:8000${blog?.picture}`}
-                                alt={`Image for ${blog?.title}`}
-                                width={1500}
-                                height={550}
-                                priority={true}
-                            />
+                            <div className='picture'>
+                                <Image
+                                    src={`http://127.0.0.1:8000${blog?.picture}`}
+                                    alt={`Image for ${blog?.title}`}
+                                    width={1080}
+                                    height={550}
+                                    priority={true}
+                                    style={{ display: 'flex', justifyContent: 'center' }}
+                                />
+                            </div>
                         )}
-                        <br />
                         {blog?.video && (
-                            <video
-                                controls
-                                width={900}
-                                height={500}
-                            >
+                            <video controls width={900} height={500}>
                                 <source src={`http://127.0.0.1:8000${blog?.video}`} type="video/mp4" />
                                 Your browser does not support the video tag.
                             </video>
                         )}
-                        <div>
-                            {markdownContent}
-                        </div>
+                        <div>{markdownContent}</div>
                     </article>
                 </>
             ) : (
@@ -91,28 +81,12 @@ export default function Blog({ blog }) {
                     </Link>
                 </div>
             )}
-
-        </Layout>
+        </div>
     );
 }
 
-export async function getStaticPaths() {
-    // Fetch blog IDs from the Django API
-    const res = await fetch('http://127.0.0.1:8000/app/blog/get/');
-    const blogs = await res.json();
-
-    const paths = blogs.map((blog) => ({
-        params: { id: blog.id.toString() },
-    }));
-
-    return {
-        paths,
-        fallback: true,
-    };
-}
-
-export async function getStaticProps({ params }) {
-    // Fetch a specific blog by ID from the Django API
+export async function getServerSideProps({ params }) {
+    // Fetch a specific blog by ID from the Django API on the server side
     const res = await fetch(`http://127.0.0.1:8000/app/blog/get/${params.id}`);
     const blog = await res.json();
 
@@ -120,6 +94,5 @@ export async function getStaticProps({ params }) {
         props: {
             blog,
         },
-        revalidate: 60, // Revalidate this page every 60 seconds
     };
 }

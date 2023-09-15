@@ -1,3 +1,4 @@
+// pages/index.js
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import Head from "next/head";
@@ -11,7 +12,6 @@ import { getDomains } from "@/lib/domains";
 export default function Home({ blogs }) {
   const { isAuthenticated, setToken } = useAuth();
   const [domains, setDomains] = useState([]);
-  const [docs, setDocs] = useState([]);
 
   useEffect(() => {
     getDomains()
@@ -24,6 +24,12 @@ export default function Home({ blogs }) {
     Router.push("/login"); // Redirect to the login page
   };
 
+  // Function to format the date to show only the date without extra characters
+  const formatDate = (dateString) => {
+    const date = new Date(dateString);
+    return date.toLocaleDateString(); // Adjust the format as per your requirements
+  };
+
   return (
     <Layout>
       <Head>
@@ -31,12 +37,16 @@ export default function Home({ blogs }) {
       </Head>
       {isAuthenticated() ? (
         <>
-          <button className="auth-button" onClick={handleLogout}>
-            Logout
-          </button>
           <br />
-          <section>
-            <h1>Domains</h1>
+          <section className="domain-section">
+            <div className="home-header">
+              <h1>Domains</h1>
+              <div>
+                <button className="auth-button" onClick={handleLogout}>
+                  Logout
+                </button>
+              </div>
+            </div>
             <ul>
               {domains.map((domain) => (
                 <li key={domain.domain_url}>
@@ -61,13 +71,18 @@ export default function Home({ blogs }) {
           </section>
 
           <section>
-            <h2>Documentation</h2>
+            <div className="home-header">
+              <h2>Documentation</h2>
+            </div>
             <ul>
               {blogs.map((blog) => (
                 <li key={blog.id}>
-                  <Link href={`/posts/${blog.id}`}>
-                    {blog.title}
-                  </Link>
+                  <h3>
+                    <Link href={`/posts/${blog.id}`}>
+                      {blog.title}
+                    </Link>
+                  </h3>
+                  <date>{formatDate(blog.date)}</date>
                 </li>
               ))}
             </ul>
@@ -85,8 +100,8 @@ export default function Home({ blogs }) {
   );
 }
 
-export async function getStaticProps() {
-  // Fetch blogs from the Django API
+export async function getServerSideProps() {
+  // Fetch blogs from the Django API on the server side
   const res = await fetch('http://127.0.0.1:8000/app/blog/get/');
   const blogs = await res.json();
 
