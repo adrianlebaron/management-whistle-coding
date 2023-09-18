@@ -6,7 +6,7 @@ import Markdown from 'markdown-to-jsx';
 
 export default function Blog({ blog }) {
     const { isAuthenticated } = useAuth();
-    const orig = 'https://api-managewhistle.com'
+    const orig = 'https://management-whistle.s3.amazonaws.com'
 
     // Render Markdown content using markdown-to-jsx
     const markdownContent = (
