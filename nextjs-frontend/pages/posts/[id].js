@@ -6,7 +6,7 @@ import Markdown from 'markdown-to-jsx';
 
 export default function Blog({ blog }) {
     const { isAuthenticated } = useAuth();
-    const orig = 'https://management-whistle.s3.amazonaws.com'
+    // const orig = 'https://management-whistle.s3.amazonaws.com'
 
     // Render Markdown content using markdown-to-jsx
     const markdownContent = (
@@ -53,13 +53,13 @@ export default function Blog({ blog }) {
                         <h1 className={utilStyles.headingXl}>{blog?.title}</h1>
                         {blog?.picture && (
                             <div className='picture'>
-                                <img src={orig + blog?.picture} />
+                                <img src={blog?.picture} />
                             </div>
                         )}
 
                         {blog?.video && (
                             <video controls width={900} height={500}>
-                                <source src={orig + blog?.video} type="video/mp4" />
+                                <source src={blog?.video} type="video/mp4" />
                                 Your browser does not support the video tag.
                             </video >
                         )
