@@ -1,14 +1,12 @@
-// pages/blog/[id].js
-import Layout from '../../components/layout';
 import Head from 'next/head';
 import utilStyles from '../../styles/utils.module.css';
-import Image from 'next/image';
 import Link from 'next/link';
 import { useAuth } from '../../contexts/AuthContext';
 import Markdown from 'markdown-to-jsx';
 
 export default function Blog({ blog }) {
     const { isAuthenticated } = useAuth();
+    const orig = 'https://api-managewhistle.com'
 
     // Render Markdown content using markdown-to-jsx
     const markdownContent = (
@@ -55,20 +53,13 @@ export default function Blog({ blog }) {
                         <h1 className={utilStyles.headingXl}>{blog?.title}</h1>
                         {blog?.picture && (
                             <div className='picture'>
-                                <Image
-                                    src={blog?.picture}
-                                    alt={`Image for ${blog?.title}`}
-                                    width={1080}
-                                    height={550}
-                                    priority={true}
-                                    style={{ display: 'flex', justifyContent: 'center' }}
-                                />
+                                <img src={orig + blog?.picture} />
                             </div>
                         )}
-                        {console.log('FOTO', blog.picture)}
+
                         {blog?.video && (
                             <video controls width={900} height={500}>
-                                <source src={blog?.video} type="video/mp4" />
+                                <source src={orig + blog?.video} type="video/mp4" />
                                 Your browser does not support the video tag.
                             </video >
                         )
