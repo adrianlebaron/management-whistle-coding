@@ -1,13 +1,12 @@
-// pages/blog/[id].js
 import Head from 'next/head';
 import utilStyles from '../../styles/utils.module.css';
-import Image from 'next/image';
 import Link from 'next/link';
 import { useAuth } from '../../contexts/AuthContext';
 import Markdown from 'markdown-to-jsx';
 
 export default function Blog({ blog }) {
     const { isAuthenticated } = useAuth();
+    const orig = 'http://localhost:8000'
 
     // Render Markdown content using markdown-to-jsx
     const markdownContent = (
@@ -54,19 +53,13 @@ export default function Blog({ blog }) {
                         <h1 className={utilStyles.headingXl}>{blog?.title}</h1>
                         {blog?.picture && (
                             <div className='picture'>
-                                <Image
-                                    src={`http://127.0.0.1:8000${blog?.picture}`}
-                                    alt={`Image for ${blog?.title}`}
-                                    width={1080}
-                                    height={550}
-                                    priority={true}
-                                    style={{ display: 'flex', justifyContent: 'center' }}
-                                />
+                                <img src={orig + blog?.picture} />
                             </div>
                         )}
+
                         {blog?.video && (
                             <video controls width={900} height={500}>
-                                <source src={`http://127.0.0.1:8000${blog?.video}`} type="video/mp4" />
+                                <source src={orig + blog?.video} type="video/mp4" />
                                 Your browser does not support the video tag.
                             </video>
                         )}
