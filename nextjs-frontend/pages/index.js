@@ -82,7 +82,7 @@ export default function Home({ blogs }) {
                       {blog.title}
                     </Link>
                   </h3>
-                  <date>{formatDate(blog.date)}</date>
+                  <span>{formatDate(blog.date)}</span>
                 </li>
               ))}
             </ul>
