@@ -56,7 +56,7 @@ export default function Blog({ blog }) {
                         {blog?.picture && (
                             <div className='picture'>
                                 <Image
-                                    src={`https://api-management-whistle.com${blog?.picture}`}
+                                    src={`https://api-managewhistle.com${blog?.picture}`}
                                     alt={`Image for ${blog?.title}`}
                                     width={1080}
                                     height={550}
@@ -67,7 +67,7 @@ export default function Blog({ blog }) {
                         )}
                         {blog?.video && (
                             <video controls width={900} height={500}>
-                                <source src={`https://api-management-whistle.com${blog?.video}`} type="video/mp4" />
+                                <source src={`https://api-managewhistle.com${blog?.video}`} type="video/mp4" />
                                 Your browser does not support the video tag.
                             </video >
                         )

@@ -7,6 +7,6 @@ module.exports = nextConfig
 
 module.exports = {
   images: {
-    domains: ['api-managewhistle.com'], // Add your domain here
+    domains: ['api-managewhistle.com'],
   },
 };
