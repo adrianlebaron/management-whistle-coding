@@ -130,6 +130,8 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+# settings.py
+MAX_FILE_SIZE = 20 * 1024 * 1024  # 20 MB (adjust as needed)
 
 # Internationalization
 # https://docs.djangoproject.com/en/4.0/topics/i18n/
