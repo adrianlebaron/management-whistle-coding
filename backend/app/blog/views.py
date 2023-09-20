@@ -6,8 +6,6 @@ from rest_framework import status
 
 from .serializers import BlogSerializer
 from .models import Blog
-from django.http import JsonResponse
-from django.conf import settings
 
 @api_view(['GET'])
 @permission_classes([AllowAny])
@@ -28,12 +26,12 @@ def getSoloBlog(request, pk):
 @permission_classes([IsAuthenticated])
 def postBlog(request):
     data = request.data
-    file = request.FILES.get('video')  # Get the video file
+    file = request.FILES.get('video')
     blog = Blog.objects.create(
         user=request.user,
         body=data['body'],
-        picture=data['picture'],  # Assuming you have an input for the picture field
-        video=file  # Set the video field
+        picture=data['picture'],
+        video=file
     )
     serializer = BlogSerializer(blog, many=False)
     return Response(serializer.data)
