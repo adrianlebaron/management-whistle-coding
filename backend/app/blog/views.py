@@ -28,27 +28,15 @@ def getSoloBlog(request, pk):
 @permission_classes([IsAuthenticated])
 def postBlog(request):
     data = request.data
-    video = request.FILES.get('video')  # Change 'video' to match your form field name
-    picture = request.FILES.get('picture')  # Change 'picture' to match your form field name
-
-    # Check if the video file size exceeds the limit
-    if video and video.size > settings.MAX_FILE_SIZE:
-        return JsonResponse({'error': 'Video file size exceeded the limit.'}, status=400)
-
-    # Check if the picture file size exceeds the limit
-    if picture and picture.size > settings.MAX_FILE_SIZE:
-        return JsonResponse({'error': 'Picture file size exceeded the limit.'}, status=400)
-
-    # Create the Blog object
+    file = request.FILES.get('video')  # Get the video file
     blog = Blog.objects.create(
         user=request.user,
         body=data['body'],
-        picture=picture,
-        video=video
+        picture=data['picture'],  # Assuming you have an input for the picture field
+        video=file  # Set the video field
     )
-
     serializer = BlogSerializer(blog, many=False)
-    return JsonResponse(serializer.data, status=201)
+    return Response(serializer.data)
 
 @api_view(['POST'])
 @permission_classes([IsAuthenticated])
