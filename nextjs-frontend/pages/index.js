@@ -47,45 +47,39 @@ export default function Home({ blogs }) {
                 </button>
               </div>
             </div>
-            <ul>
-              {domains.map((domain) => (
-                <li key={domain.domain_url}>
-                  <Linkify
-                    componentDecorator={(decoratedHref, decoratedText, key) => (
-                      <a
-                        href={decoratedHref}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        key={key}
-                      >
-                        {decoratedText}
-                        <FiExternalLink />
-                      </a>
-                    )}
-                  >
-                    {domain.domain_url}
-                  </Linkify>
-                </li>
-              ))}
-            </ul>
+            {domains.map((domain) => (
+              <div key={domain.domain_url}>
+                <Linkify
+                  componentDecorator={(decoratedHref, decoratedText, key) => (
+                    <a
+                      href={decoratedHref}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      key={key}
+                    >
+                      {decoratedText}
+                      <FiExternalLink />
+                    </a>
+                  )}
+                >
+                  {domain.domain_url}
+                </Linkify>
+              </div>
+            ))}
           </section>
 
           <section>
             <div className="home-header">
               <h2>Documentation</h2>
             </div>
-            <ul>
-              {blogs.map((blog) => (
-                <li key={blog.id}>
-                  <h3>
-                    <Link href={`/posts/${blog.id}`}>
-                      {blog.title}
-                    </Link>
-                  </h3>
-                  <span>{formatDate(blog.date)}</span>
-                </li>
-              ))}
-            </ul>
+            {blogs.map((blog) => (
+              <div key={blog.id} style={{ margin: '0 0 1.25rem' }}>
+                <Link href={`/posts/${blog.id}`} style={{ fontSize: '1.3rem' }}>
+                  {blog.title}
+                </Link><br />
+                <span style={{ color: 'grey' }}>{formatDate(blog.date)}</span>
+              </div>
+            ))}
           </section>
         </>
       ) : (

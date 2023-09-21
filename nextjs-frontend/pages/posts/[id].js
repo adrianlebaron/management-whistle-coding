@@ -23,11 +23,12 @@ export default function Blog({ blog }) {
                         component: 'pre',
                         props: {
                             style: {
-                                backgroundColor: '#242f35',
+                                backgroundColor: '#2d2a2e',
+                                color: '#ab9df2',
                                 borderRadius: '5px',
                                 padding: '20px',
-                                color: 'rgb(252 152 103)',
                                 overflow: 'scroll',
+                                maxHeight: '500px',
                             },
                         },
                     },
@@ -43,9 +44,7 @@ export default function Blog({ blog }) {
             <Head>
                 <title>{blog.title}</title>
             </Head>
-            <div style={{ border: '1px solid #f41a24', margin: '40px' }}></div>
-            <Link href="/">Back to home</Link>
-
+            {/* <div style={{ border: '1px solid #f41a24', margin: '40px' }}></div> */}
             {isAuthenticated() ? (
                 <>
                     <article>
@@ -57,12 +56,13 @@ export default function Blog({ blog }) {
                         )}
 
                         {blog?.video && (
-                            <video controls width={900} height={500}>
-                                <source src={blog?.video} type="video/mp4" />
-                                Your browser does not support the video tag.
-                            </video >
-                        )
-                        }
+                            <div className='video'>
+                                <video controls width={900} height={500}>
+                                    <source src={orig + blog?.video} type="video/mp4" />
+                                    Your browser does not support the video tag.
+                                </video>
+                            </div>
+                        )}
                         <div>{markdownContent}</div>
                     </article >
                 </>
@@ -74,6 +74,7 @@ export default function Blog({ blog }) {
                     </Link>
                 </div>
             )}
+            <Link href="/">← Back to home</Link>
         </div>
     );
 }

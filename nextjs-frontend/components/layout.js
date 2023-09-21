@@ -10,60 +10,24 @@ export const siteTitle = 'Next.js Sample Website';
 export default function Layout({ children, home }) {
     return (
         <div className={styles.container}>
-            <Head>
-                <link rel="icon" href="/favicon.ico" />
-                <meta
-                    name="description"
-                    content="Learn how to build a personal website using Next.js"
-                />
-                <meta
-                    property="og:image"
-                    content={`https://og-image.vercel.app/${encodeURI(
-                        siteTitle,
-                    )}.png?theme=light&md=0&fontSize=75px&images=https%3A%2F%2Fassets.vercel.com%2Fimage%2Fupload%2Ffront%2Fassets%2Fdesign%2Fnextjs-black-logo.svg`}
-                />
-                <meta name="og:title" content={siteTitle} />
-                <meta name="twitter:card" content="summary_large_image" />
-            </Head>
             <header className={styles.header}>
-                {home ? (
-                    <>
-                        <Image
-                            priority
-                            src="/images/logo.png"
-                            className={utilStyles.borderCircle}
-                            height={100}
-                            width={100}
-                            alt=""
-                        />
-                        <h1 className={utilStyles.heading2Xl}>{name}</h1>
-                    </>
-                ) : (
-                    <>
-                        <Link href="/">
-                            <Image
-                                priority
-                                src="/images/logo.png"
-                                className={utilStyles.borderCircle}
-                                height={200}
-                                width={200}
-                                alt=""
-                            />
-                        </Link>
-                        <h2 className={utilStyles.headingLg}>
-                            <Link href="/" className={utilStyles.colorInherit}>
-                                {name}
-                            </Link>
-                        </h2>
-                    </>
-                )}
+                <>
+                    <Image
+                        priority
+                        src="/images/logo.png"
+                        className={utilStyles.borderCircle}
+                        height={150}
+                        width={150}
+                        alt=""
+                    />
+                    <h1 className={utilStyles.headingLg}>
+                        {name}
+                    </h1>
+                    <script type="module" src="https://unpkg.com/@splinetool/viewer@0.9.455/build/spline-viewer.js"></script>
+                    <spline-viewer hint loading-anim url="https://prod.spline.design/xLzr30n-VHCqc6bt/scene.splinecode"></spline-viewer>
+                </>
             </header>
             <main>{children}</main>
-            {!home && (
-                <div className={styles.backToHome}>
-                    {/* <Link href="/">← Back to home</Link> */}
-                </div>
-            )}
         </div>
     );
 }

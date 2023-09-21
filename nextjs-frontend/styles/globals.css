@@ -29,7 +29,7 @@ img {
 
 /* auth elements styles */
 .auth-button {
-  font-size: 20px;
+  font-size: 17px;
   border-radius: 5px;
   cursor: pointer;
   padding: 8px;
@@ -84,12 +84,17 @@ img {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 20px;
-  padding-bottom: 0px;
-  margin-bottom: -25px;
 }
 
 @media (max-width: 470px) {
+  .domain-section {
+    position: relative;
+    padding: 0px;
+    margin: 0px;
+  }
+}
+
+@media (max-width: 1250px) {
   .domain-section {
     position: relative;
     padding: 0px;
@@ -103,10 +108,16 @@ img {
   align-items: center;
 }
 
+.video {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 /* Blog */
 .blog {
-  margin-right: 150px;
-  margin-left: 150px;
+  max-width: 40rem;
+  margin: 3rem auto 6rem;
 }
 
 @media (max-width: 470px) {
