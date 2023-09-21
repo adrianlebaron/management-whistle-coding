@@ -59,8 +59,7 @@ export default function Blog({ blog }) {
                         {blog?.video && (
                             <div className='video'>
                                 <video controls width={900} height={500}>
-                                    <source src={orig + blog?.video} type="video/mp4" />
-                                    Your browser does not support the video tag.
+                                    <source src={orig + blog?.video} />
                                 </video>
                             </div>
                         )}
