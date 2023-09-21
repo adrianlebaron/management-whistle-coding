@@ -23,8 +23,6 @@ export default function Layout({ children, home }) {
                     <h1 className={utilStyles.headingLg}>
                         {name}
                     </h1>
-                    <script type="module" src="https://unpkg.com/@splinetool/viewer@0.9.455/build/spline-viewer.js"></script>
-                    <spline-viewer hint loading-anim url="https://prod.spline.design/xLzr30n-VHCqc6bt/scene.splinecode"></spline-viewer>
                 </>
             </header>
             <main>{children}</main>
