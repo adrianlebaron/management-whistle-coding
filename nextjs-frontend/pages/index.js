@@ -7,15 +7,44 @@ import { useAuth } from "../contexts/AuthContext";
 import Router from "next/router";
 import Linkify from "react-linkify";
 import { FiExternalLink } from "react-icons/fi";
-import { getDomains } from "@/lib/domains";
+import { getDrywallDomains } from "@/lib/domains";
+import { getFamilyDomains } from "@/lib/domains";
+import { getCommunityDomains } from "@/lib/domains";
+import { getOtherDomains } from "@/lib/domains";
 
 export default function Home({ blogs }) {
   const { isAuthenticated, setToken } = useAuth();
-  const [domains, setDomains] = useState([]);
+  const [drywallDomains, setDrywallDomains] = useState([]);
+  const [familyDomains, setFamilyDomains] = useState([]);
+  const [communityDomains, setCommunityDomains] = useState([]);
+  const [otherDomains, setOtherDomains] = useState([]);
+
+  // Function to sort an array of domains alphabetically
+  const sortDomainsAlphabetically = (domains) => {
+    return domains.slice().sort((a, b) => a.domain_url.localeCompare(b.domain_url));
+  };
 
   useEffect(() => {
-    getDomains()
-      .then((data) => setDomains(data))
+    getDrywallDomains()
+      .then((data) => setDrywallDomains(sortDomainsAlphabetically(data)))
+      .catch((error) => console.error(error));
+  }, []);
+
+  useEffect(() => {
+    getFamilyDomains()
+      .then((data) => setFamilyDomains(sortDomainsAlphabetically(data)))
+      .catch((error) => console.error(error));
+  }, []);
+
+  useEffect(() => {
+    getCommunityDomains()
+      .then((data) => setCommunityDomains(sortDomainsAlphabetically(data)))
+      .catch((error) => console.error(error));
+  }, []);
+
+  useEffect(() => {
+    getOtherDomains()
+      .then((data) => setOtherDomains(sortDomainsAlphabetically(data)))
       .catch((error) => console.error(error));
   }, []);
 
@@ -47,7 +76,71 @@ export default function Home({ blogs }) {
                 </button>
               </div>
             </div>
-            {domains.map((domain) => (
+            <h3>Drywall</h3>
+            {drywallDomains.map((domain) => (
+              <div key={domain.domain_url}>
+                <Linkify
+                  componentDecorator={(decoratedHref, decoratedText, key) => (
+                    <a
+                      href={decoratedHref}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      key={key}
+                    >
+                      {decoratedText}
+                      <FiExternalLink />
+                    </a>
+                  )}
+                >
+                  {domain.domain_url}
+                </Linkify>
+              </div>
+            ))}
+
+            <h3>Family</h3>
+            {familyDomains.map((domain) => (
+              <div key={domain.domain_url}>
+                <Linkify
+                  componentDecorator={(decoratedHref, decoratedText, key) => (
+                    <a
+                      href={decoratedHref}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      key={key}
+                    >
+                      {decoratedText}
+                      <FiExternalLink />
+                    </a>
+                  )}
+                >
+                  {domain.domain_url}
+                </Linkify>
+              </div>
+            ))}
+
+            <h3>Community</h3>
+            {communityDomains.map((domain) => (
+              <div key={domain.domain_url}>
+                <Linkify
+                  componentDecorator={(decoratedHref, decoratedText, key) => (
+                    <a
+                      href={decoratedHref}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      key={key}
+                    >
+                      {decoratedText}
+                      <FiExternalLink />
+                    </a>
+                  )}
+                >
+                  {domain.domain_url}
+                </Linkify>
+              </div>
+            ))}
+
+            <h3>Other</h3>
+            {otherDomains.map((domain) => (
               <div key={domain.domain_url}>
                 <Linkify
                   componentDecorator={(decoratedHref, decoratedText, key) => (

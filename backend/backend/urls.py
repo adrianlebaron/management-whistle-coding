@@ -23,6 +23,7 @@ urlpatterns = [
     # point to the api app and let it handle the traffic there
     path('api/', include('api.urls')),
     path('app/blog/', include('app.blog.urls')),
+    path('app/domain/', include('app.domain.urls')),
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
