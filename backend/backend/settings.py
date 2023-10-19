@@ -45,8 +45,8 @@ BASE_APPS = [
 
 LOCAL_APPS = [
     'app.blog',
-    'api.apps.ApiConfig'
-
+    'app.domain',
+    'api.apps.ApiConfig',
 ]
 
 THIRD_APPS = [

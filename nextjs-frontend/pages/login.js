@@ -5,6 +5,7 @@ import axios from 'axios';
 import { useAuth } from '../contexts/AuthContext';
 import Layout from '../components/layout';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
+import Image from 'next/image';
 
 export default function LoginPage() {
     const router = useRouter();
@@ -48,28 +49,41 @@ export default function LoginPage() {
 
     return (
         <Layout>
-            <h1>Login Page</h1>
-            {errorMessage && <p style={{ color: 'red' }}>{errorMessage}</p>}
-            <input
-                className='login-input'
-                type="text"
-                placeholder="Username"
-                value={username}
-                onChange={(e) => setUsername(e.target.value)}
-            />
-            <div style={{ display: 'flex' }}>
-                <input
-                    className='login-input'
-                    type={showPassword ? 'text' : 'password'}
-                    placeholder="Password"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
+            <div className='login-page-container'>
+                <Image
+                    priority
+                    src="/images/logosinbackground.png"
+                    height={150}
+                    width={150}
+                    alt=""
                 />
-                <button className='eye-button' onClick={togglePasswordVisibility}>
-                    {showPassword ? <FaEyeSlash /> : <FaEye />}
-                </button>
+                <h1>WHISTLE CODING DOCUMENTATION</h1>
+
+                <h1>Login</h1>
+                {errorMessage && <p style={{ color: 'red' }}>{errorMessage}</p>}
+                <div>
+                    <input
+                        className='login-input'
+                        type="text"
+                        placeholder="Username"
+                        value={username}
+                        onChange={(e) => setUsername(e.target.value)}
+                    />
+                    <div style={{ display: 'flex' }}>
+                        <input
+                            className='login-input'
+                            type={showPassword ? 'text' : 'password'}
+                            placeholder="Password"
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
+                        />
+                        <button className='eye-button' onClick={togglePasswordVisibility}>
+                            {showPassword ? <FaEyeSlash /> : <FaEye />}
+                        </button>
+                    </div>
+                </div>
+                <button className='auth-button' onClick={handleLogin}>Login</button>
             </div>
-            <button className='auth-button' onClick={handleLogin}>Login</button>
         </Layout>
     );
 }

@@ -4,5 +4,4 @@ from . import views
 
 urlpatterns = [
     path('login/', obtain_auth_token, name='api_token_auth'),
-    path('get-domains/', views.getDomains),
 ]

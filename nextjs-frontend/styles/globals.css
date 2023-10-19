@@ -27,7 +27,13 @@ img {
   display: block;
 }
 
-/* auth elements styles */
+/* auth elements and Login page styles */
+.login-page-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 .auth-button {
   font-size: 17px;
   border-radius: 5px;
@@ -68,16 +74,38 @@ img {
 }
 
 /* Home page styles */
-.domain-section {
+.home-page-container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.domains-container {
+  display: flex;
+  justify-content: center;
+  width: 25%;
+  overflow-y: scroll !important;
   position: fixed;
-  top: 0;
-  margin: 20px 20px;
-  padding-bottom: 20px;
-  height: 100%;
-  /* Set the height to take up the entire viewport */
-  overflow-y: auto;
+  height: 90%;
   left: 0;
-  width: 300px;
+}
+
+.domains {
+  height: auto;
+  width: 80%;
+}
+
+.blogs-container {
+  display: flex;
+  justify-content: center;
+  width: 60%;
+  position: relative;
+  right: 0;
+  margin-left: 33%;
+}
+
+.blogs {
+  width: 80%;
+  /* border: 1px solid #0070f3; */
 }
 
 .home-header {
@@ -86,16 +114,8 @@ img {
   align-items: center;
 }
 
-@media (max-width: 470px) {
-  .domain-section {
-    position: relative;
-    padding: 0px;
-    margin: 0px;
-  }
-}
-
 @media (max-width: 1250px) {
-  .domain-section {
+  .domains-container {
     position: relative;
     padding: 0px;
     margin: 0px;
@@ -121,6 +141,21 @@ img {
 }
 
 @media (max-width: 470px) {
+  .home-page-container {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .domains-container {
+    position: relative;
+    width: 100%;
+  }
+
+  .blogs-container {
+    width: 100%;
+    margin-left: 0;
+  }
+
   .blog {
     margin: 10px;
     position: absolute;
