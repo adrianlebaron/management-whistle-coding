@@ -10,7 +10,7 @@ export const siteTitle = 'Next.js Sample Website';
 export default function Layout({ children, home }) {
     return (
         <div className={styles.container}>
-            <header className={styles.header}>
+            {/* <Head className={styles.header}>
                 <>
                     <Image
                         priority
@@ -24,7 +24,7 @@ export default function Layout({ children, home }) {
                         {name}
                     </h1>
                 </>
-            </header>
+            </Head> */}
             <main>{children}</main>
         </div>
     );

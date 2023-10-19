@@ -49,13 +49,12 @@ export default function Blog({ blog }) {
             {isAuthenticated() ? (
                 <>
                     <article>
-                        <h1 className={utilStyles.headingXl}>{blog?.title}</h1>
                         {blog?.picture && (
                             <div className='picture'>
                                 <img src={orig + blog?.picture} />
                             </div>
                         )}
-
+                        <h1 className={utilStyles.headingXl}>{blog?.title}</h1>
                         {blog?.video && (
                             <div className='video'>
                                 <video controls width={900} height={500}>
@@ -67,7 +66,7 @@ export default function Blog({ blog }) {
                     </article>
                 </>
             ) : (
-                <div>
+                <div style={{ display: 'flex', alignItems: 'center' }}>
                     <p>You need to log in to access this page.</p>
                     <Link href="/login">
                         <button className='auth-button'>Login</button>
