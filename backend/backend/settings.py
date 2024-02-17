@@ -30,6 +30,7 @@ DEBUG = False
 ALLOWED_HOSTS = [
     'management.us-west-2.elasticbeanstalk.com',
     'api-managewhistle.com',
+    'http://ec2-54-191-24-238.us-west-2.compute.amazonaws.com/',
 ]
 
 # Application definition
