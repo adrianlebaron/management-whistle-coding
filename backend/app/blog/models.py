@@ -8,4 +8,3 @@ class Blog(models.Model):
     body = models.TextField(blank=True, null=True)
     date = models.DateTimeField(auto_now_add=True)
     picture = models.ImageField(null=True, blank=True)
-    video = models.FileField(upload_to='videos_uploaded', null=True, blank=True, validators=[FileExtensionValidator(allowed_extensions=['MOV','avi','mp4','webm','mkv'])])

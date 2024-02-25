@@ -26,12 +26,10 @@ def getSoloBlog(request, pk):
 @permission_classes([IsAuthenticated])
 def postBlog(request):
     data = request.data
-    file = request.FILES.get('video')
     blog = Blog.objects.create(
         user=request.user,
         body=data['body'],
         picture=data['picture'],
-        video=file
     )
     serializer = BlogSerializer(blog, many=False)
     return Response(serializer.data)
