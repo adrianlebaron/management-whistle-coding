@@ -6,7 +6,6 @@ import Markdown from 'markdown-to-jsx';
 
 export default function Blog({ blog }) {
     const { isAuthenticated } = useAuth();
-    const orig = 'http://localhost:8000'
 
     // Render Markdown content using markdown-to-jsx
     const markdownContent = (
@@ -51,19 +50,19 @@ export default function Blog({ blog }) {
                     <article>
                         {blog?.picture && (
                             <div className='picture'>
-                                <img src={orig + blog?.picture} />
+                                <img src={blog?.picture} />
                             </div>
                         )}
                         <h1 className={utilStyles.headingXl}>{blog?.title}</h1>
                         {blog?.video && (
                             <div className='video'>
                                 <video controls width={900} height={500}>
-                                    <source src={orig + blog?.video} />
+                                    <source src={blog?.video} />
                                 </video>
                             </div>
                         )}
                         <div>{markdownContent}</div>
-                    </article>
+                    </article >
                 </>
             ) : (
                 <div style={{ display: 'flex', alignItems: 'center' }}>
@@ -80,7 +79,7 @@ export default function Blog({ blog }) {
 
 export async function getServerSideProps({ params }) {
     // Fetch a specific blog by ID from the Django API on the server side
-    const res = await fetch(`http://127.0.0.1:8000/app/blog/get/${params.id}`);
+    const res = await fetch(`https://api-managewhistle.com/app/blog/get/${params.id}`);
     const blog = await res.json();
 
     return {
