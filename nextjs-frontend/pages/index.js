@@ -195,7 +195,7 @@ export default function Home({ blogs }) {
 
 export async function getServerSideProps() {
   // Fetch blogs from the Django API on the server side
-  const res = await fetch('https://api-managewhistle.com/app/blog/get/');
+  const res = await fetch('http://127.0.0.1:8000/app/blog/get/');
   const blogs = await res.json();
 
   return {
