@@ -54,13 +54,6 @@ export default function Blog({ blog }) {
                             </div>
                         )}
                         <h1 className={utilStyles.headingXl}>{blog?.title}</h1>
-                        {blog?.video && (
-                            <div className='video'>
-                                <video controls width={900} height={500}>
-                                    <source src={blog?.video} />
-                                </video>
-                            </div>
-                        )}
                         <div>{markdownContent}</div>
                     </article >
                 </>

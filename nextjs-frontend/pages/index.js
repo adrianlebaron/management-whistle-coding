@@ -11,6 +11,7 @@ import { getDrywallDomains } from "@/lib/domains";
 import { getFamilyDomains } from "@/lib/domains";
 import { getCommunityDomains } from "@/lib/domains";
 import { getOtherDomains } from "@/lib/domains";
+import { FaRegistered } from "react-icons/fa";
 
 export default function Home({ blogs }) {
   const { isAuthenticated, setToken } = useAuth();
@@ -94,7 +95,7 @@ export default function Home({ blogs }) {
                         </a>
                       )}
                     >
-                      {domain.domain_url}
+                      {domain.domain_url} <FaRegistered /><strong>{domain.registrar}</strong>  
                     </Linkify>
                   </div>
                 ))}
@@ -115,7 +116,7 @@ export default function Home({ blogs }) {
                         </a>
                       )}
                     >
-                      {domain.domain_url}
+                      {domain.domain_url} <FaRegistered /><strong>{domain.registrar}</strong>  
                     </Linkify>
                   </div>
                 ))}
@@ -136,7 +137,7 @@ export default function Home({ blogs }) {
                         </a>
                       )}
                     >
-                      {domain.domain_url}
+                      {domain.domain_url} <FaRegistered /><strong>{domain.registrar}</strong>  
                     </Linkify>
                   </div>
                 ))}
@@ -157,7 +158,7 @@ export default function Home({ blogs }) {
                         </a>
                       )}
                     >
-                      {domain.domain_url}
+                      {domain.domain_url} <FaRegistered /><strong>{domain.registrar}</strong>  
                     </Linkify>
                   </div>
                 ))}
