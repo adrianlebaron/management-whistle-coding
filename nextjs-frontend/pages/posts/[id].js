@@ -38,6 +38,7 @@ export default function Blog({ blog }) {
             {blog?.body}
         </Markdown>
     );
+    console.log('BLOGGG', blog)
 
     return (
         <div className='blog'>
@@ -50,7 +51,7 @@ export default function Blog({ blog }) {
                     <article>
                         {blog?.picture && (
                             <div className='picture'>
-                                <img src={blog?.picture} />
+                                <img src={`http://localhost:8000${blog?.picture}`} />
                             </div>
                         )}
                         <h1 className={utilStyles.headingXl}>{blog?.title}</h1>
