@@ -1,65 +1,22 @@
-// pages/index.js
-import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import Head from "next/head";
 import Layout from "../components/layout";
 import { useAuth } from "../contexts/AuthContext";
 import Router from "next/router";
-import Linkify from "react-linkify";
-import { FiExternalLink } from "react-icons/fi";
-import { getDrywallDomains } from "@/lib/domains";
-import { getFamilyDomains } from "@/lib/domains";
-import { getCommunityDomains } from "@/lib/domains";
-import { getOtherDomains } from "@/lib/domains";
-import { FaRegistered } from "react-icons/fa";
+import DomainsTable from "@/components/DomainsTable";
 
 export default function Home({ blogs }) {
   const { isAuthenticated, setToken } = useAuth();
-  const [drywallDomains, setDrywallDomains] = useState([]);
-  const [familyDomains, setFamilyDomains] = useState([]);
-  const [communityDomains, setCommunityDomains] = useState([]);
-  const [otherDomains, setOtherDomains] = useState([]);
-
-  // Function to sort an array of domains alphabetically
-  const sortDomainsAlphabetically = (domains) => {
-    return domains.slice().sort((a, b) => a.domain_url.localeCompare(b.domain_url));
-  };
-
-  useEffect(() => {
-    getDrywallDomains()
-      .then((data) => setDrywallDomains(sortDomainsAlphabetically(data)))
-      .catch((error) => console.error(error));
-  }, []);
-
-  useEffect(() => {
-    getFamilyDomains()
-      .then((data) => setFamilyDomains(sortDomainsAlphabetically(data)))
-      .catch((error) => console.error(error));
-  }, []);
-
-  useEffect(() => {
-    getCommunityDomains()
-      .then((data) => setCommunityDomains(sortDomainsAlphabetically(data)))
-      .catch((error) => console.error(error));
-  }, []);
-
-  useEffect(() => {
-    getOtherDomains()
-      .then((data) => setOtherDomains(sortDomainsAlphabetically(data)))
-      .catch((error) => console.error(error));
-  }, []);
 
   const handleLogout = () => {
     setToken("");
-    Router.push("/login"); // Redirect to the login page
+    Router.push("/login");
   };
-
-  // Function to format the date to show only the date without extra characters
+  // Function to format the date to show only the date without extra characters for the blogs
   const formatDate = (dateString) => {
     const date = new Date(dateString);
-    return date.toLocaleDateString(); // Adjust the format as per your requirements
+    return date.toLocaleDateString();
   };
-
   return (
     <Layout>
       <Head>
@@ -79,92 +36,10 @@ export default function Home({ blogs }) {
                     </button>
                   </div>
                 </div>
-                <h3>Drywall</h3>
-                {drywallDomains.map((domain) => (
-                  <div key={domain.domain_url}>
-                    <Linkify
-                      componentDecorator={(decoratedHref, decoratedText, key) => (
-                        <a
-                          href={decoratedHref}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          key={key}
-                        >
-                          {decoratedText}
-                          <FiExternalLink />
-                        </a>
-                      )}
-                    >
-                      {domain.domain_url} <FaRegistered /><strong>{domain.registrar}</strong>  
-                    </Linkify>
-                  </div>
-                ))}
-
-                <h3>Family</h3>
-                {familyDomains.map((domain) => (
-                  <div key={domain.domain_url}>
-                    <Linkify
-                      componentDecorator={(decoratedHref, decoratedText, key) => (
-                        <a
-                          href={decoratedHref}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          key={key}
-                        >
-                          {decoratedText}
-                          <FiExternalLink />
-                        </a>
-                      )}
-                    >
-                      {domain.domain_url} <FaRegistered /><strong>{domain.registrar}</strong>  
-                    </Linkify>
-                  </div>
-                ))}
-
-                <h3>Community</h3>
-                {communityDomains.map((domain) => (
-                  <div key={domain.domain_url}>
-                    <Linkify
-                      componentDecorator={(decoratedHref, decoratedText, key) => (
-                        <a
-                          href={decoratedHref}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          key={key}
-                        >
-                          {decoratedText}
-                          <FiExternalLink />
-                        </a>
-                      )}
-                    >
-                      {domain.domain_url} <FaRegistered /><strong>{domain.registrar}</strong>  
-                    </Linkify>
-                  </div>
-                ))}
-
-                <h3>Other</h3>
-                {otherDomains.map((domain) => (
-                  <div key={domain.domain_url}>
-                    <Linkify
-                      componentDecorator={(decoratedHref, decoratedText, key) => (
-                        <a
-                          href={decoratedHref}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          key={key}
-                        >
-                          {decoratedText}
-                          <FiExternalLink />
-                        </a>
-                      )}
-                    >
-                      {domain.domain_url} <FaRegistered /><strong>{domain.registrar}</strong>  
-                    </Linkify>
-                  </div>
-                ))}
+                {/* DOMAINS TABLE */}
+                <DomainsTable/>
               </section>
             </div>
-
             <div className="blogs-container">
               <section className="blogs">
                 <div className="home-header">

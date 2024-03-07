@@ -82,7 +82,7 @@ img {
 .domains-container {
   display: flex;
   justify-content: center;
-  width: 30%;
+  width: 32%;
   overflow-y: scroll !important;
   position: fixed;
   height: 90%;
@@ -92,6 +92,44 @@ img {
 .domains {
   height: auto;
   width: 80%;
+}
+
+/* TABLE STYLES */
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th, td {
+  padding: 8px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+th {
+  background-color: #f2f2f2;
+}
+
+h3 {
+  margin-top: 10px;
+  margin-bottom: 5px;
+}
+
+a {
+  color: #007bff;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+strong {
+  margin-left: 5px;
+}
+
+.fa-registered {
+  margin-right: 5px;
 }
 
 .blogs-container {
