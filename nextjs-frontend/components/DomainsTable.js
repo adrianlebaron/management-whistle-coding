@@ -3,10 +3,9 @@ import { getDrywallDomains } from "@/lib/domains";
 import { getFamilyDomains } from "@/lib/domains";
 import { getCommunityDomains } from "@/lib/domains";
 import { getOtherDomains } from "@/lib/domains";
-import { useAuth } from "../contexts/AuthContext";
+import Linkify from 'react-linkify';
 
 export default function DomainsTable() {
-    const { isAuthenticated, setToken } = useAuth();
     const [drywallDomains, setDrywallDomains] = useState([]);
     const [familyDomains, setFamilyDomains] = useState([]);
     const [communityDomains, setCommunityDomains] = useState([]);
@@ -60,9 +59,13 @@ export default function DomainsTable() {
                     {drywallDomains.map((domain) => (
                         <tr key={domain.domain_url}>
                             <td>
-                                <a href={domain.domain_url} target="_blank" rel="noopener noreferrer">
+                                <Linkify componentDecorator={(decoratedHref, decoratedText, key) => (
+                                    <a href={decoratedHref} target="_blank" rel="noopener noreferrer" key={key}>
+                                        {decoratedText}
+                                    </a>
+                                )}>
                                     {domain.domain_url}
-                                </a>
+                                </Linkify>
                             </td>
                             <td>
                                 <strong>{domain.registrar}</strong>
@@ -77,9 +80,13 @@ export default function DomainsTable() {
                     {familyDomains.map((domain) => (
                         <tr key={domain.domain_url}>
                             <td>
-                                <a href={domain.domain_url} target="_blank" rel="noopener noreferrer">
+                                <Linkify componentDecorator={(decoratedHref, decoratedText, key) => (
+                                    <a href={decoratedHref} target="_blank" rel="noopener noreferrer" key={key}>
+                                        {decoratedText}
+                                    </a>
+                                )}>
                                     {domain.domain_url}
-                                </a>
+                                </Linkify>
                             </td>
                             <td>
                                 <strong>{domain.registrar}</strong>
@@ -94,9 +101,13 @@ export default function DomainsTable() {
                     {communityDomains.map((domain) => (
                         <tr key={domain.domain_url}>
                             <td>
-                                <a href={domain.domain_url} target="_blank" rel="noopener noreferrer">
+                                <Linkify componentDecorator={(decoratedHref, decoratedText, key) => (
+                                    <a href={decoratedHref} target="_blank" rel="noopener noreferrer" key={key}>
+                                        {decoratedText}
+                                    </a>
+                                )}>
                                     {domain.domain_url}
-                                </a>
+                                </Linkify>
                             </td>
                             <td>
                                 <strong>{domain.registrar}</strong>
@@ -111,9 +122,13 @@ export default function DomainsTable() {
                     {otherDomains.map((domain) => (
                         <tr key={domain.domain_url}>
                             <td>
-                                <a href={domain.domain_url} target="_blank" rel="noopener noreferrer">
+                                <Linkify componentDecorator={(decoratedHref, decoratedText, key) => (
+                                    <a href={decoratedHref} target="_blank" rel="noopener noreferrer" key={key}>
+                                        {decoratedText}
+                                    </a>
+                                )}>
                                     {domain.domain_url}
-                                </a>
+                                </Linkify>
                             </td>
                             <td>
                                 <strong>{domain.registrar}</strong>

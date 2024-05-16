@@ -6,8 +6,6 @@ import Markdown from 'markdown-to-jsx';
 
 export default function Blog({ blog }) {
     const { isAuthenticated } = useAuth();
-
-    // Render Markdown content using markdown-to-jsx
     const markdownContent = (
         <Markdown
             options={{
@@ -38,14 +36,12 @@ export default function Blog({ blog }) {
             {blog?.body}
         </Markdown>
     );
-    console.log('BLOGGG', blog)
 
     return (
         <div className='blog'>
             <Head>
                 <title>{blog.title}</title>
             </Head>
-            {/* <div style={{ border: '1px solid #f41a24', margin: '40px' }}></div> */}
             {isAuthenticated() ? (
                 <>
                     <article>
@@ -72,7 +68,6 @@ export default function Blog({ blog }) {
 }
 
 export async function getServerSideProps({ params }) {
-    // Fetch a specific blog by ID from the Django API on the server side
     const res = await fetch(`http://127.0.0.1:8000/app/blog/get/${params.id}`);
     const blog = await res.json();
 
