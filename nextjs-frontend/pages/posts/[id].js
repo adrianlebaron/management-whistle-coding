@@ -6,8 +6,6 @@ import Markdown from 'markdown-to-jsx';
 
 export default function Blog({ blog }) {
     const { isAuthenticated } = useAuth();
-
-    // Render Markdown content using markdown-to-jsx
     const markdownContent = (
         <Markdown
             options={{
@@ -38,14 +36,12 @@ export default function Blog({ blog }) {
             {blog?.body}
         </Markdown>
     );
-    console.log('BLOGGG', blog)
 
     return (
         <div className='blog'>
             <Head>
                 <title>{blog.title}</title>
             </Head>
-            {/* <div style={{ border: '1px solid #f41a24', margin: '40px' }}></div> */}
             {isAuthenticated() ? (
                 <>
                     <article>
