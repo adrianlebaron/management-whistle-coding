@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const API_URL = "https://api-managewhistle.com";
+const API_URL = process.env.apiKey;
 
 export async function getDrywallDomains() {
     try {
