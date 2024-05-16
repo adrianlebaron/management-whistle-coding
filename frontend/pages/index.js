@@ -5,6 +5,8 @@ import { useAuth } from "../contexts/AuthContext";
 import Router from "next/router";
 import DomainsTable from "@/components/DomainsTable";
 
+const API_URL = process.env.apiKey;
+
 export default function Home({ blogs }) {
   const { isAuthenticated, setToken } = useAuth();
 
@@ -71,7 +73,7 @@ export default function Home({ blogs }) {
 
 export async function getServerSideProps() {
   // Fetch blogs from the Django API on the server side
-  const res = await fetch('http://127.0.0.1:8000/app/blog/get/');
+  const res = await fetch(`${API_URL}/app/blog/get/`);
   const blogs = await res.json();
 
   return {

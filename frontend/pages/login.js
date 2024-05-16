@@ -6,6 +6,8 @@ import Layout from '../components/layout';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
 import Image from 'next/image';
 
+const API_URL = process.env.apiKey;
+
 export default function LoginPage() {
     const router = useRouter();
     const { setToken, isAuthenticated } = useAuth();
@@ -23,7 +25,7 @@ export default function LoginPage() {
 
     const handleLogin = async () => {
         try {
-            const response = await axios.post('http://127.0.0.1:8000/api/login/', {
+            const response = await axios.post(`${API_URL}/api/login/`, {
                 username,
                 password,
             });
