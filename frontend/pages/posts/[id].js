@@ -1,11 +1,24 @@
 import Head from 'next/head';
 import utilStyles from '../../styles/utils.module.css';
 import Link from 'next/link';
-import { useAuth } from '../../contexts/AuthContext';
 import Markdown from 'markdown-to-jsx';
+import { useLayoutEffect } from 'react';
+import { authStore } from '../../stores/auth_store/Store';
+import Router from "next/router";
+import withAuth from '../../hoc/withAuth';
 
-export default function Blog({ blog }) {
-    const { isAuthenticated } = useAuth();
+const API_URL = process.env.apiKey;
+
+const Blog = ({ blog }) => {
+    const isAuthenticated = authStore((state) => state.token)
+
+    useLayoutEffect(() => {
+        const isAuth = isAuthenticated;
+        if (!isAuth) {
+            Router.push("/login")
+        }
+    }, [])
+
     const markdownContent = (
         <Markdown
             options={{
@@ -67,9 +80,11 @@ export default function Blog({ blog }) {
     );
 }
 
+export default withAuth(Blog);
+
 export async function getServerSideProps({ params }) {
     // Fetch a specific blog by ID from the Django API on the server side
-    const res = await fetch(`https://api-managewhistle.com/app/blog/get/${params.id}`);
+    const res = await fetch(`${API_URL}/app/blog/get/${params.id}`);
     const blog = await res.json();
 
     return {

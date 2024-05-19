@@ -1,24 +1,24 @@
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import axios from 'axios';
-import { useAuth } from '../contexts/AuthContext';
 import Layout from '../components/layout';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
 import Image from 'next/image';
+import {authStore} from '../stores/auth_store/Store'
 
 const API_URL = process.env.apiKey;
 
 export default function LoginPage() {
     const router = useRouter();
-    const { setToken, isAuthenticated } = useAuth();
-
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [showPassword, setShowPassword] = useState(false);
     const [errorMessage, setErrorMessage] = useState('');
+    const setToken = authStore(store => store.setToken)
+    const { token } = authStore((state) => state);
 
     useEffect(() => {
-        if (isAuthenticated()) {
+        if (token) {
             router.push('/');
         }
     }, []);

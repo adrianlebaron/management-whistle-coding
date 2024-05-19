@@ -1,8 +1,5 @@
 import { useEffect, useState } from "react";
-import { getDrywallDomains } from "@/lib/domains";
-import { getFamilyDomains } from "@/lib/domains";
-import { getCommunityDomains } from "@/lib/domains";
-import { getOtherDomains } from "@/lib/domains";
+import { getDrywallDomains, getFamilyDomains, getCommunityDomains, getOtherDomains } from "../lib/domains";
 import Linkify from 'react-linkify';
 
 export default function DomainsTable() {
