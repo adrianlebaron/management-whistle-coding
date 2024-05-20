@@ -2,11 +2,10 @@ import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 import { authStore } from "../stores/auth_store/Store";
 
-const isAuthenticated = authStore((state) => state.token);
-const protectedRoutes = ["/"];
-const dynamicProtectedRoutes = [/^\/posts\/.*/];
-
 export default function middleware(req: NextRequest) {
+  const isAuthenticated = authStore((state) => state.token);
+  const protectedRoutes = ["/"];
+  const dynamicProtectedRoutes = [/^\/posts\/.*/];
   const { pathname } = req.nextUrl;
 
   const isProtectedRoute = (route) => {
