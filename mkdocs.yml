@@ -2,15 +2,18 @@ site_name: Manage Whistle Docs
 theme:
   name: material
   features:
-    - navigation.tabs
-    - navigation.sections
     - toc.integrate
-    - navigation.top
     - search.suggest
     - search.highlight
-    - content.tabs.link
     - content.code.annotation
     - content.code.copy
+    - navigation.instant
+    - navigation.instant.prefetch
+    - navigation.instant.progress
+    - navigation.tabs
+    - navigation.tabs.sticky
+    - navigation.sections
+
   language: en
   palette:
     - scheme: default
@@ -41,12 +44,11 @@ markdown_extensions:
   - pymdownx.superfences
   - pymdownx.mark
   - attr_list
-  - pymdownx.emoji:
-      emoji_index: !!python/name:materialx.emoji.twemoji
-      emoji_generator: !!python/name:materialx.emoji.to_svg
 
 plugins:
   - glightbox
+  - search:
+      lang: en
   
 copyright: |
   &copy; 2023 <a href="https://github.com/adrianlebaron"  target="_blank" rel="noopener">Manage whistle docs</a>
