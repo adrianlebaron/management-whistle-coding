@@ -10,9 +10,9 @@ theme:
     - navigation.instant
     - navigation.instant.prefetch
     - navigation.instant.progress
-    - navigation.tabs
     - navigation.tabs.sticky
     - navigation.sections
+    - content.code.annotate
 
   language: en
   palette:
@@ -44,11 +44,24 @@ markdown_extensions:
   - pymdownx.superfences
   - pymdownx.mark
   - attr_list
+  - attr_list
+  - pymdownx.emoji:
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
+  - toc:
+      permalink: true
+  - tables
 
 plugins:
   - glightbox
   - search:
       lang: en
+
+links:
+  - plugins/search.md 
+  - Insiders:
+    - insiders/index.md#how-to-become-a-sponsor
+    - insiders/getting-started.md#requirements
   
 copyright: |
-  &copy; 2023 <a href="https://github.com/adrianlebaron"  target="_blank" rel="noopener">Manage whistle docs</a>
+  &copy; 2024 <a href="https://github.com/adrianlebaron"  target="_blank" rel="noopener">Manage whistle docs</a>
