@@ -1,33 +1,27 @@
-1- Abrir una terminal de powershell como admin.
---------------------------------------------------
-
-2- Verficar si los scripts son permitidos:
----------------------------------------------
-
-```js
+1. Abre una terminal de powershell como `administrador`.
+-
+2. Verfica si los scripts son permitidos:
+-
+``` yaml title="powershell"
 Get-ExecutionPolicy
 ```
 
-Deberia salir «Restricted» que son restringidos
+Podría salir `Restricted`, significa que estan restringidos y por eso no te funciona activar tu venv de python cuando corres por ejemplo: `.\env\Scripts\activate`
 
-3- Cambiar configuracion:
-------------------------------
-
-```js
-#comando para activar scripts:
-
+3. Para cambiarlos a `no restringidos` corre el siguiente comando:
+-
+``` yaml title="powershell"
 Set-ExecutionPolicy Unrestricted
 
-#indicar Si[S]
+#indicar Sí[S]
 ```
 
-4- verficar:
--------------
-
-```js
+4. Verifíca de nuevo:
+-
+``` title="powershell"
 Get-ExecutionPolicy
 ```
 
-Deberia salir «Unrestricted»
+Ahora te debería salir `Unrestricted`
 
-Eso indicaria que ya es posible correr scripts en tu powershell
+Eso indica que ya es posible correr scripts en tu powershell como `.\env\Scripts\activate` exitosamente
