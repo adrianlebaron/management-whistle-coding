@@ -1,4 +1,4 @@
-# Manage Whistle Docs, a web application 
+# Dynamic docs web application 
 ## Technologies:
 1. Django and Django rest framework for the back-end
 2. Next js for the front-end
